@@ -1,0 +1,19 @@
+{
+    "config": {
+        "swo-enabled": {
+            "help"      : "Enable single wire output disabling UART/stdio",
+            "options"   : [null, 1],
+            "value"     : null
+          }
+    },
+    "target_overrides": {
+        "*": {
+            "platform.stdio-buffered-serial": true,    
+            "platform.stdio-convert-newlines": true
+        },
+        "MM": {
+            "target.stdio_uart_tx": "MAIN_TX",
+            "target.stdio_uart_rx": "MAIN_RX"    
+        }
+    }
+}
