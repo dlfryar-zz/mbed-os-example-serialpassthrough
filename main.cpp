@@ -4,7 +4,9 @@ RawSerial pc(USBTX, USBRX);
 RawSerial dev(WIFI_CELLULAR_TX, WIFI_CELLULAR_RX);
 
 DigitalOut wifi_prog_no(PROG_WIFI_N, 0); // high flash boot, low uart download mode
-                                         // change to 0 in order to test AT commands
+                                         // change to 1 in order to test AT commands
+                                         // make sure to match dev baudrate below since
+                                         // in normal mode the ESP comes up at 115200
 DigitalOut wifi_reset_n(RESET_N, 1);
 DigitalOut wifi_no(WIFI_N, 1);
 DigitalOut wifi_power_enable(WIFI_PWR_EN, 1);
@@ -35,8 +37,8 @@ void pc_recv()
 
 int main()
 {
-    pc.baud(57600);
-    dev.baud(57600);
+    pc.baud(115200);
+    dev.baud(115200);
 
     pc.attach(&pc_recv, Serial::RxIrq);
     dev.attach(&dev_recv, Serial::RxIrq);
